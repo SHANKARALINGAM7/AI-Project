@@ -1,0 +1,13 @@
+
+#serp api
+google-search-results
+
+langchain
+langchain_groq
+langgraph
+langsmith
+python-dotenv>=1.0.0
+
+prophet
+fastapi
+sqlalchemy

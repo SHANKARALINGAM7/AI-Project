@@ -1,0 +1,9 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "po_automation": {
+      "path": "./graph.py:final_graph"
+    }
+  },
+  "env": ".env"
+}
