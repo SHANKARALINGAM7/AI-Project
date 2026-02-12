@@ -5,7 +5,7 @@ from datetime import date, timedelta
 
 def get_sales_bulk(db: Session,days: int = 150):
     """
-    Fetch sales history for given products and aggregate quantity sold per day
+    ##Fetch sales history for given products and aggregate quantity sold per day
     """
     start_date = date.today() - timedelta(days=days)
 

@@ -9,7 +9,6 @@ from crud import get_all_suppliers, get_products
 from state import AgentState
 from core.database import session
 from sqlalchemy.orm import Session
-
 from utils.structure_output import convert_to_json
 
 
@@ -89,7 +88,6 @@ def festival_demand_analyzer(state: AgentState) -> AgentState:
         **state,
         "festival_impacts": category_festival_map
     }
-
     
     
 def weather_demand_analyzer(state:AgentState)->AgentState:
@@ -109,7 +107,4 @@ def response_formatter(state:AgentState):
     return {
         **state,
         "response":response
-    }
-    
-    
-    
+    } 

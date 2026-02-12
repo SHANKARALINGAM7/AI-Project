@@ -1,0 +1,224 @@
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #f5f7fa;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .controls {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .generate-btn {
+        padding: 12px 24px;
+        background: #4a6ee0;
+        color: white;
+        border: 2px solid black;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .generate-btn:hover {
+        background: #3a5ed0;
+      }
+
+      .loader {
+        text-align: center;
+        color: #666;
+        display: none;
+        margin: 20px 0;
+      }
+
+      .order-card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        overflow: hidden;
+      }
+
+      .order-header {
+        padding: 16px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        background: white;
+        border-bottom: 1px solid #eee;
+      }
+
+      .order-header:hover {
+        background: #f9f9f9;
+      }
+
+      .order-info h3 {
+        margin: 0 0 4px 0;
+        color: #2c3e50;
+      }
+
+      .order-info p {
+        margin: 0;
+        color: #666;
+        font-size: 14px;
+      }
+
+      .arrow {
+        color: #4a6ee0;
+      }
+
+      .order-details {
+        padding: 0 20px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .order-card.expanded .order-details {
+        max-height: 1000px;
+        padding: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+
+      th {
+        background: #f8f9fa;
+        padding: 12px;
+        text-align: left;
+        font-weight: 600;
+        color: #495057;
+        border-bottom: 2px solid #dee2e6;
+      }
+
+      td {
+        padding: 12px;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      tr:hover {
+        background: #f8f9fa;
+      }
+
+      .festival-btn {
+        background: none;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 6px 12px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+
+      .festival-btn:hover {
+        background: #f0f0f0;
+      }
+
+      .demand-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 6px;
+        vertical-align: middle;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 8px;
+        width: 90%;
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 24px;
+        position: relative;
+      }
+
+      .modal-header {
+        margin-bottom: 16px;
+      }
+
+      .modal-header h3 {
+        margin: 0;
+        color: #2c3e50;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #666;
+      }
+
+      .impact-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-left: 8px;
+      }
+
+      .high {
+        background: #fee;
+        color: #d32f2f;
+      }
+      .medium {
+        background: #fff3e0;
+        color: #f57c00;
+      }
+      .low {
+        background: #e8f5e8;
+        color: #388e3c;
+      }
+      .order-footer {
+        display: flex;
+        justify-content: flex-end; /* pushes button to right */
+        margin-top: 20px;
+      }
+
+      .place-order-btn {
+        background-color: #4caf50;
+        color: white;
+        padding: 12px 28px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .place-order-btn:hover {
+        background-color: #43a047;
+      }

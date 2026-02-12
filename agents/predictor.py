@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 import  pandas as pd
 from prophet import Prophet
-from prophet.diagnostics import cross_validation, performance_metrics
+from prophet.diagnostics import cross_validation
 from crud import get_sales_bulk
 
 def get_prediction(db: Session,forecast_days:int = 30):
@@ -11,7 +11,7 @@ def get_prediction(db: Session,forecast_days:int = 30):
     
     ## data fetch from db (type object)
     sales_data = get_sales_bulk(db,150)  
-    ## sales data in ascending (if prev_id != cur_id send to prophet)
+   
     if not sales_data:
         return {}
 
@@ -79,5 +79,4 @@ def predict_sales_quantity(data,forecast_days,id):
         forecast_quantity = prediction.tail(forecast_days)["yhat"].sum()
         
         return max(0, round(forecast_quantity))
-    
     

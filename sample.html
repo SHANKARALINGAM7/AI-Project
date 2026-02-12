@@ -1,340 +1,185 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Purchase Order Generator</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f5f7fa;
-      margin: 0;
-      padding: 20px;
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    
-    h1 {
-      color: #2c3e50;
-      margin-bottom: 10px;
-    }
-    
-    .controls {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    
-    .generate-btn {
-      padding: 12px 24px;
-      background: #4a6ee0;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    
-    .generate-btn:hover {
-      background: #3a5ed0;
-    }
-    
-    .loader {
-      text-align: center;
-      color: #666;
-      display: none;
-      margin: 20px 0;
-    }
-    
-    .order-card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-      overflow: hidden;
-    }
-    
-    .order-header {
-      padding: 16px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      background: white;
-      border-bottom: 1px solid #eee;
-    }
-    
-    .order-header:hover {
-      background: #f9f9f9;
-    }
-    
-    .order-info h3 {
-      margin: 0 0 4px 0;
-      color: #2c3e50;
-    }
-    
-    .order-info p {
-      margin: 0;
-      color: #666;
-      font-size: 14px;
-    }
-    
-    .arrow {
-      color: #4a6ee0;
-    }
-    
-    .order-details {
-      padding: 0 20px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-    
-    .order-card.expanded .order-details {
-      max-height: 1000px;
-      padding: 20px;
-    }
-    
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
-    
-    th {
-      background: #f8f9fa;
-      padding: 12px;
-      text-align: left;
-      font-weight: 600;
-      color: #495057;
-      border-bottom: 2px solid #dee2e6;
-    }
-    
-    td {
-      padding: 12px;
-      border-bottom: 1px solid #dee2e6;
-    }
-    
-    tr:hover {
-      background: #f8f9fa;
-    }
-    
-    .festival-btn {
-      background: none;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      padding: 6px 12px;
-      cursor: pointer;
-      font-size: 12px;
-    }
-    
-    .festival-btn:hover {
-      background: #f0f0f0;
-    }
-    
-    .demand-icon {
-      width: 20px;
-      height: 20px;
-      margin-right: 6px;
-      vertical-align: middle;
-    }
-    
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-    }
-    
-    .modal-content {
-      background: white;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 400px;
-      margin: 50px auto;
-      padding: 24px;
-      position: relative;
-    }
-    
-    .modal-header {
-      margin-bottom: 16px;
-    }
-    
-    .modal-header h3 {
-      margin: 0;
-      color: #2c3e50;
-    }
-    
-    .close-btn {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      color: #666;
-    }
-    
-    .impact-badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-left: 8px;
-    }
-    
-    .high { background: #fee; color: #d32f2f; }
-    .medium { background: #fff3e0; color: #f57c00; }
-    .low { background: #e8f5e8; color: #388e3c; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <h1>Purchase Order Generator</h1>
-      <p>Generate and manage purchase orders</p>
-    </header>
-    
-    <div class="controls">
-      <button class="generate-btn" onclick="generatePO()">Generate Purchase Order</button>
-    </div>
-    
-    <div id="loader" class="loader" style="display:none;">Loading...</div>
-    
-    <div id="orders"></div>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Purchase Order Generator</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Purchase Order Generator</h1>
+        <p>Generate and manage purchase orders</p>
+      </header>
 
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <button class="close-btn" onclick="closeModal()">×</button>
-      <div class="modal-header">
-        <h3 id="modal-title"></h3>
+      <div class="controls">
+        <button class="generate-btn" onclick="generatePO()">
+          Generate Purchase Order
+        </button>
       </div>
-      <div id="modal-body"></div>
+
+      <div id="loader" class="loader" style="display: none">Generating Order Draft...</div>
+
+      <div id="orders"></div>
     </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">×</button>
+        <div class="modal-header">
+          <h3 id="modal-title"></h3>
+        </div>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+
+    <script>
+      async function generatePO() {
+        const loader = document.getElementById("loader");
+        const ordersContainer = document.getElementById("orders");
+
+        loader.style.display = "block";
+        ordersContainer.innerHTML = "";
+
+        try {
+          const response = await fetch("http://127.0.0.1:8000/generate-po");
+          const data = await response.json();
+          loader.style.display = "none";
+          renderOrders(data);
+        } catch (error) {
+          loader.style.display = "none";
+          ordersContainer.innerHTML =
+            '<p style="color: red; text-align: center;">Error loading data</p>';
+        }
+      }
+
+      function renderOrders(data) {
+        const container = document.getElementById("orders");
+        const ordersMap = {};
+
+        data.forEach((item) => {
+          if (!ordersMap[item.order_number]) ordersMap[item.order_number] = [];
+          ordersMap[item.order_number].push(item);
+        });
+
+        Object.entries(ordersMap).forEach(([orderNum, items]) => {
+          const suppliers = [
+            ...new Set(items.map((item) => item.supplier_name)),
+          ];
+
+          const orderCard = document.createElement("div");
+          orderCard.className = "order-card";
+          orderCard.innerHTML = `
+  <div class="order-header">
+    <div class="order-info">
+      <h3>${orderNum}</h3>
+      <p>Suppliers: ${suppliers.join(", ")} • ${items.length} items</p>
+    </div>
+    <div class="arrow">▼</div>
   </div>
 
-  <script>
-    async function generatePO() {
-      const loader = document.getElementById("loader");
-      const ordersContainer = document.getElementById("orders");
-      
-      loader.style.display = "block";
-      ordersContainer.innerHTML = "";
-      
-      try {
-        const response = await fetch("http://127.0.0.1:8000/generate-po");
-        const data = await response.json();
-        loader.style.display = "none";
-        renderOrders(data);
-      } catch (error) {
-        loader.style.display = "none";
-        ordersContainer.innerHTML = '<p style="color: red; text-align: center;">Error loading data</p>';
-      }
-    }
+  <div class="order-details">
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Current</th>
+          <th>Suggested</th>
+          <th>Action</th>
+          <th>Festival</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${items
+          .map(
+            (item) => `
+          <tr>
+            <td>${item.product_name}</td>
+            <td>${item.category}</td>
+            <td>${item.current_quantity}</td>
+            <td>
+              <input id="${item.product_id}" type="number" value="${item.suggested_quantity}" />
+            </td>
+            <td>
+              <button onclick="restoreQuantity('${item.product_id}', ${item.suggested_quantity})">
+                Restore
+              </button>
+            </td>
+            <td>
+              ${
+                item.festival_name
+                  ? `<button class="festival-btn"
+                       onclick="showFestivalModal('${item.festival_name}', '${item.festival_impact_level}')">
+                       View Impact
+                     </button>`
+                  : "-"
+              }
+            </td>
+          </tr>
+        `,
+          )
+          .join("")}
+      </tbody>
+    </table>
 
-    function renderOrders(data) {
-      const container = document.getElementById("orders");
-      const ordersMap = {};
-      
-      data.forEach(item => {
-        if (!ordersMap[item.order_number]) ordersMap[item.order_number] = [];
-        ordersMap[item.order_number].push(item);
-      });
+    <div class="order-footer">
+      <button onclick="submitOrder(${items.supplier_name})" class="place-order-btn">
+        Place Order
+      </button>
+    </div>
+  </div>
+`;
 
-      Object.entries(ordersMap).forEach(([orderNum, items]) => {
-        const suppliers = [...new Set(items.map(item => item.supplier_name))];
-        
-        const orderCard = document.createElement("div");
-        orderCard.className = "order-card";
-        orderCard.innerHTML = `
-          <div class="order-header">
-            <div class="order-info">
-              <h3>${orderNum}</h3>
-              <p>Suppliers: ${suppliers.join(", ")} • ${items.length} items</p>
-            </div>
-            <div class="arrow">▼</div>
-          </div>
-          <div class="order-details">
-            <table>
-              <thead>
-                <tr>
-                  <th>Product</th>
-                  <th>Category</th>
-                  <th>Current</th>
-                  <th>Suggested</th>
-                  <th>Festival</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${items.map(item => `
-                  <tr>
-                    <td>${item.product_name}</td>
-                    <td>${item.category}</td>
-                    <td>${item.current_quantity}</td>
-                    <td>${item.suggested_quantity}</td>
-                    <td>
-                      ${item.festival_name ? `
-                        <button class="festival-btn" onclick="showFestivalModal('${item.festival_name}', '${item.festival_impact_level}')">
-                          
-                          View Impact
-                        </button>
-                      ` : '-'}
-                    </td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          </div>
-        `;
-        
-        orderCard.querySelector('.order-header').addEventListener('click', () => {
-          orderCard.classList.toggle('expanded');
+          orderCard
+            .querySelector(".order-header")
+            .addEventListener("click", () => {
+              orderCard.classList.toggle("expanded");
+            });
+
+          container.appendChild(orderCard);
         });
-        
-        container.appendChild(orderCard);
-      });
-    }
+      }
 
-    function showFestivalModal(festivalName, impactLevel) {
-      const modal = document.getElementById("modal");
-      const title = document.getElementById("modal-title");
-      const body = document.getElementById("modal-body");
-      
-      const impactText = impactLevel.charAt(0).toUpperCase() + impactLevel.slice(1);
-      
-      title.textContent = festivalName;
-      body.innerHTML = `
+      function showFestivalModal(festivalName, impactLevel) {
+        const modal = document.getElementById("modal");
+        const title = document.getElementById("modal-title");
+        const body = document.getElementById("modal-body");
+
+        const impactText =
+          impactLevel.charAt(0).toUpperCase() + impactLevel.slice(1);
+
+        title.textContent = festivalName;
+        body.innerHTML = `
         <p><strong>Impact Level:</strong> <span class="impact-badge ${impactLevel}">${impactText}</span></p>
         <p>This festival increases demand for this product. Expected demand impact: <strong>${impactText}</strong>.</p>
         <p>Consider adjusting stock levels to meet the increased demand during this period.</p>
       `;
-      
-      modal.style.display = "block";
-    }
 
-    function closeModal() {
-      document.getElementById("modal").style.display = "none";
-    }
-
-    window.onclick = function(event) {
-      const modal = document.getElementById("modal");
-      if (event.target == modal) {
-        closeModal();
+        modal.style.display = "block";
       }
-    }
-  </script>
-</body>
+
+      function closeModal() {
+        document.getElementById("modal").style.display = "none";
+      }
+
+      window.onclick = function (event) {
+        const modal = document.getElementById("modal");
+        if (event.target == modal) {
+          closeModal();
+        }
+      };
+
+      function restoreQuantity(productId, suggestedQty) {
+        const input = document.getElementById(productId);
+        if (input) {
+          input.value = suggestedQty;
+        }
+      }
+
+      function submitOrder(supplier_name){
+        alert("Order placed");
+      }
+    </script>
+  </body>
 </html>
